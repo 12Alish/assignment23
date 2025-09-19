@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const myPromise = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve("Task Completed");
+  }, 2000);
+});
+
+myPromise.then((message) => {
+  console.log(message); 
+});
+// checkage
+function checkEligibility(age) {
+  return new Promise((resolve, reject) => {
+    if (age >= 18) {
+      resolve("Eligible");
+    } else {
+      reject("Not Eligible");
+    }
+  });
+}
+
+checkEligibility(25)
+  .then(message => {
+    console.log(message); 
+  })
+  .catch(error => {
+    console.error(error);
+  });
+checkEligibility(17)
+  .then(message => {
+    console.log(message);
+  })
+  .catch(error => {
+    console.error(error); 
+  });
+
+
+
+  //
+  const myRejectedPromise = new Promise((resolve, reject) => {
+  
+  const errorOccurred = true; 
+
+  if (errorOccurred) {
+    reject(new Error("Something went wrong! This promise was rejected."));
+  } else {
+    resolve("This promise was resolved successfully.");
+  }
+});
+myRejectedPromise.then(message => {
+  console.log("Success:", message); 
+}).catch(error => {
+  console.error("Error caught:", error.message); 
+});
+//upper case
+const uppercasePromise = (str) => {
+  
+  return Promise.resolve(str.toUpperCase());
+};
+uppercasePromise("hieee")
+  .then(uppercaseString => {
+    console.log(uppercaseString); 
+  });
+
+uppercasePromise("Another letter")
+  .then(uppercaseString => {
+    console.log(uppercaseString); 
+    //asyn 
+    async function resolveGreeting() {
+  return new Promise((resolve) => {
+    resolve("Hello Async");
+      });
+}
+
+async function main() {
+  const message = await resolveGreeting();
+  console.log(message);
+}
+
+main();
+//
+async function doubleNumberFromPromise() {
+  
+  const getNumberPromise = new Promise(resolve => {
+    setTimeout(() => {
+      resolve(5);
+    }, 1000); // After 1 second
+  });
+
+  
+  const number = await getNumberPromise;
+
+  
+  const doubledNumber = number * 2;
+
+  
+  console.log("The doubled number is:", doubledNumber);
+}
+doubleNumberFromPromise();
+     });
+function failingPromise() {
+  return new Promise((resolve, reject) => {
+    
+    setTimeout(() => {
+      reject(new Error("Operation failed: Invalid user data."));
+    }, 500);
+  });
+}
+
+
+async function handleRejectedPromise() {
+  try {
+    console.log("Starting async operation...");
+    
+    await failingPromise(); 
+    console.log("This line will not run if the promise rejects.");
+  } catch (error) {
+    
+    console.error("Caught an error in the async function:", error.message);
+  }
+}
+
+
+handleRejectedPromise();
+//
+async function executeSequentialPromises() {
+  
+  const promise1 = new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Step 1");
+      resolve();
+    }, 1000); 
+  });
+
+  const promise2 = new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Step 2");
+      resolve();
+    }, 500); 
+  });
+
+  
+  await promise1;
+
+  
+  await promise2;
+
+  console.log("All steps completed.");
+}
+
+
+executeSequentialPromises();
+
+
+
+
+
+
+
+
+  
+
+  
+    </script>
+</body>
+</html>
